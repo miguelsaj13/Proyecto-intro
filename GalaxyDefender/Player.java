@@ -1,19 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Player here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+//Se define el jugador como un objeto controlable
 public class Player extends Actor
 {
-    /**
-     * Act - do whatever the Player wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    //Aqui se definen controles del jugador
     public void act()
     {
-        // Add your action code here.
+        // Con las siguientes indicaciones 
+        // se configura como actua el jugador
+        
     }
 }
