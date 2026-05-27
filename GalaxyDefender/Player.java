@@ -8,12 +8,32 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
-    /**
-     * Act - do whatever the Player wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void act()
     {
-        // Add your action code here.
+        movePlayer();
+    }
+
+    public void movePlayer()
+    {
+        if(Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a"))
+        {
+            move(-4);
+        }
+
+        if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d"))
+        {
+            move(4);
+        }
+
+        if(getX() < 50)
+        {
+            setLocation(50, getY());
+        }
+
+        if(getX() > getWorld().getWidth() - 50)
+        {
+            setLocation(getWorld().getWidth() - 50, getY());
+        }
     }
 }
+
