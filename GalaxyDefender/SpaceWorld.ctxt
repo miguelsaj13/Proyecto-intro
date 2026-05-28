@@ -2,4 +2,12 @@
 comment0.target=SpaceWorld
 comment1.params=
 comment1.target=SpaceWorld()
-numComments=2
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ generarEnemigos()
+comment4.params=puntos
+comment4.target=void\ sumarPuntos(int)
+comment5.params=
+comment5.target=void\ perderVida()
+numComments=6

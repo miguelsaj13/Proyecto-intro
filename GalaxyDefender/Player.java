@@ -8,6 +8,9 @@ public class Player extends Actor
     //Para poder reproducir solamente una vez el audio de inicio se crea una variable boolanea
     //esto para que cuando este se haya reproducido una vez acabar la repetición
     private boolean sonidoReproducido = false;
+    
+    private int tiempoDisparo = 20;
+    
     public void act()
     {
         if(!sonidoReproducido)
@@ -17,6 +20,9 @@ public class Player extends Actor
         }
         //Función que activas las funciones de movimiento del jugador
         movePlayer();
+        disparar();
+
+        tiempoDisparo++;
     }
 
     public void sonidoInicio()
@@ -55,6 +61,18 @@ public class Player extends Actor
             setLocation(getWorld().getWidth() - 50, getY());
         }
 
+    }
+    
+    public void disparar()
+    {
+        if(Greenfoot.isKeyDown("space") && tiempoDisparo >= 15)
+        {
+            Disparo disparo = new Disparo();
+
+            getWorld().addObject(disparo, getX(), getY() - 20);
+
+            tiempoDisparo = 0;
+        }
     }
 }
 

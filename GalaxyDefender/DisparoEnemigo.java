@@ -5,6 +5,16 @@ public class DisparoEnemigo extends Actor {
     //Indica la velocidad del disparo del enemigo
     private int velocidad = 5;
     
+    public DisparoEnemigo(){
+        GreenfootImage img = new GreenfootImage(5, 20);
+    
+        img.setColor(new Color(255,0,0));
+    
+        img.fill();
+    
+        setImage(img);
+    }
+    
     @Override
     public void act() {
         
@@ -12,6 +22,7 @@ public class DisparoEnemigo extends Actor {
         mover();
         //Verifica si el disparo salió y toca el borde
         verificarBorde();
+        verificarColision();
     }
 
     //Indicacaciones para el movimiento de los disparos
@@ -24,6 +35,14 @@ public class DisparoEnemigo extends Actor {
     
     //Indicaciones de colisión con jugador
     
+    private void verificarColision() {
+        // Detecta si el disparo enemigo tocó al jugador
+        Actor jugador = getOneIntersectingObject(Player.class);
+        if (jugador != null) {
+            ((SpaceWorld) getWorld()).perderVida();
+            getWorld().removeObject(this);
+        }
+    }
     
     //Indicaciones para cuando el disparo toque el borde de la pantalla
     private void verificarBorde() {

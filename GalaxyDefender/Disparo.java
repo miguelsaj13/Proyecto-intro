@@ -5,6 +5,16 @@ public class Disparo extends Actor {
     //Velocidad con la que el disparo se mueve
     private int velocidad = 10;
     
+    public Disparo(){
+        GreenfootImage img = new GreenfootImage(5, 20);
+    
+        img.setColor(Color.CYAN);
+    
+        img.fill();
+    
+        setImage(img);
+    }
+    
     @Override
     public void act() {
         //Función que mueve los disparos
@@ -26,8 +36,9 @@ public class Disparo extends Actor {
     //Indicaciones para la colisión de los disparos
     private void verificarColisiones() {
         // Detecta si el disparo tocó un enemigo
-        Actor enemigo = getOneIntersectingObject(Player.class);
+        Actor enemigo = getOneIntersectingObject(Enemigo.class);
         if (enemigo != null) {
+            ((SpaceWorld) getWorld()).sumarPuntos(10);
             getWorld().removeObject(enemigo);
             getWorld().removeObject(this);
             
