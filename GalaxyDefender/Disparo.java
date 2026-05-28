@@ -26,10 +26,8 @@ public class Disparo extends Actor {
     //Indicaciones para la colisión de los disparos
     private void verificarColisiones() {
         // Detecta si el disparo tocó un enemigo
-        Actor enemigo = getOneIntersectingObject(Enemigo.class);
+        Actor enemigo = getOneIntersectingObject(Player.class);
         if (enemigo != null) {
-            // Notifica al mundo para sumar puntos
-            ((GalaxyWorld) getWorld()).sumarPuntos(10);
             getWorld().removeObject(enemigo);
             getWorld().removeObject(this);
             
