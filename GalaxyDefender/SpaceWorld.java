@@ -8,6 +8,7 @@ public class SpaceWorld extends World
     private int score = 0;
     private int nivel = 1;
     private int tiempoSpawn = 100;
+    private int vidas = 3;
     
     //Aquí se indican el tamaño y aparición del jugador
     public SpaceWorld()
@@ -19,6 +20,7 @@ public class SpaceWorld extends World
         addObject(new Player(), 400, 500);
         showText("Puntos: 0", 80, 20);
         showText("Nivel: 1", 400, 20);
+        showText("Vidas: 3", 700, 20);
     }
     
     public void act()
@@ -72,6 +74,17 @@ public class SpaceWorld extends World
     // Método para perder vida
     public void perderVida()
     {
-        System.out.println("Jugador golpeado");
+        vidas--;
+        showText("Vidas: " + vidas, 700, 20);
+        if(vidas <= 0)
+        {
+            gameOver();
+        }
+    }
+    private void gameOver()
+    {
+        showText("GAME OVER", 400, 300);
+        showText("Puntaje Final: " + score, 400, 320);
+        Greenfoot.stop();
     }
 }

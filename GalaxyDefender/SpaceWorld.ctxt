@@ -12,4 +12,6 @@ comment5.params=puntos
 comment5.target=void\ sumarPuntos(int)
 comment6.params=
 comment6.target=void\ perderVida()
-numComments=7
+comment7.params=
+comment7.target=void\ gameOver()
+numComments=8
