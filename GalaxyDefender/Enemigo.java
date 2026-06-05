@@ -26,6 +26,10 @@ public class Enemigo extends Actor
     public void mover()
     {
         setLocation(getX(), getY() + velocidad);
+        if(getY() > getWorld().getHeight())
+        {
+            getWorld().removeObject(this);
+        }
     }
 
     public void disparar()

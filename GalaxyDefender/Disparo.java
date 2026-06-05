@@ -7,7 +7,7 @@ public class Disparo extends Actor {
     
     public Disparo(){
         GreenfootImage img = new GreenfootImage(5, 20);
-    
+        Greenfoot.playSound("Disparo.wav");
         img.setColor(Color.CYAN);
     
         img.fill();
@@ -20,7 +20,10 @@ public class Disparo extends Actor {
         //Función que mueve los disparos
         mover();
         //Función que verifica si el disparo conecto con el enemigo
-        verificarColisiones();
+        if(verificarColisiones())
+        {
+            return;
+        }
         //Verifica si el disparo chocó contra el borde del mundo
         verificarBorde();
     }
@@ -29,12 +32,10 @@ public class Disparo extends Actor {
     private void mover() {
         //Mantiene la misma posición en X y disminuye Y para poder subir
         setLocation(getX(), getY() - velocidad);
-        //Reproducción del audio de disparo
-        Greenfoot.playSound("Disparo.wav");
     }
     
     //Indicaciones para la colisión de los disparos
-    private void verificarColisiones() {
+    private boolean verificarColisiones() {
         // Detecta si el disparo tocó un enemigo
         Actor enemigo = getOneIntersectingObject(Enemigo.class);
         if (enemigo != null) {
@@ -44,7 +45,9 @@ public class Disparo extends Actor {
             
             //Reproducción del audio de colisión
             Greenfoot.playSound("Explosion.wav");
+            return true;
         }
+        return false;
     }
     
     //Indicaciones para los disparos que van hacia el borde del mundo

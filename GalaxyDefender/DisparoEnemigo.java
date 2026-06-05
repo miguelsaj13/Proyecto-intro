@@ -7,7 +7,7 @@ public class DisparoEnemigo extends Actor {
     
     public DisparoEnemigo(){
         GreenfootImage img = new GreenfootImage(5, 20);
-    
+        Greenfoot.playSound("Disparo.wav");
         img.setColor(new Color(255,0,0));
     
         img.fill();
@@ -29,8 +29,6 @@ public class DisparoEnemigo extends Actor {
     private void mover() {
         //Mantiene la posición en X y aumenta Y para que el disparo baje
         setLocation(getX(), getY() + velocidad);
-        //Reproducción del audio de disparo
-        Greenfoot.playSound("Disparo.wav");
     }
     
     //Indicaciones de colisión con jugador

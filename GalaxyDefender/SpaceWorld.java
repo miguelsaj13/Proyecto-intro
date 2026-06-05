@@ -5,6 +5,9 @@ import greenfoot.*;
 public class SpaceWorld extends World
 {
     private int contadorEnemigos = 0;
+    private int score = 0;
+    private int nivel = 1;
+    private int tiempoSpawn = 100;
     
     //Aquí se indican el tamaño y aparición del jugador
     public SpaceWorld()
@@ -14,6 +17,8 @@ public class SpaceWorld extends World
 
         //Se agrega el jugador en la posición indicada
         addObject(new Player(), 400, 500);
+        showText("Puntos: 0", 80, 20);
+        showText("Nivel: 1", 400, 20);
     }
     
     public void act()
@@ -26,7 +31,7 @@ public class SpaceWorld extends World
         contadorEnemigos++;
 
         // Genera un enemigo cada cierto tiempo
-        if(contadorEnemigos >= 100)
+        if(contadorEnemigos >= tiempoSpawn)
         {
             int x = Greenfoot.getRandomNumber(getWidth());
 
@@ -36,10 +41,32 @@ public class SpaceWorld extends World
         }
     }
     
+    private void actualizarNivel()
+    {
+        if(score >= 200)
+        {
+            nivel = 3;
+            tiempoSpawn = 50;
+        }
+        else if(score >= 100)
+        {
+            nivel = 2;
+            tiempoSpawn = 75;
+        }
+        else
+        {
+            nivel = 1;
+            tiempoSpawn = 100;
+        }
+    }
+    
     // Método para sumar puntos
     public void sumarPuntos(int puntos)
     {
-        System.out.println("+" + puntos + " puntos");
+        score += puntos;
+        actualizarNivel();
+        showText("Puntos: " + score, 80, 20);
+        showText("Nivel: " + nivel, 400, 20);
     }
 
     // Método para perder vida
