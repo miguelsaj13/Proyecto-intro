@@ -37,14 +37,14 @@ public class Player extends Actor
         {
             //Cuando el jugador presiona la tecla "a" 
             //el jugador se movera hacia la izquierda
-            move(-4);
+            move(-5);
         }
 
         if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d"))
         {
             //Cuando el jugador presiona la tecla "d"
             //el jugador se movera hacia la izquierda
-            move(4);
+            move(5);
         }
 
         //Verificación para el jugador, asi no sale por el lado izquierdo de la pantalla

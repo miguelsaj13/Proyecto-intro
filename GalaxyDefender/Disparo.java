@@ -20,11 +20,15 @@ public class Disparo extends Actor {
         //Función que mueve los disparos
         mover();
         //Función que verifica si el disparo conecto con el enemigo
+        if (getWorld() == null) return;
+        
         if(verificarColisiones())
         {
             return;
         }
         //Verifica si el disparo chocó contra el borde del mundo
+        if (getWorld() == null) return;
+        
         verificarBorde();
     }
     
@@ -53,8 +57,15 @@ public class Disparo extends Actor {
     //Indicaciones para los disparos que van hacia el borde del mundo
     private void verificarBorde() {
         // Elimina el disparo si sale de la pantalla
-        if (getY() < 0) {
-            getWorld().removeObject(this);
+        World mundo = getWorld();
+
+        if (mundo == null) {
+            return;
         }
+
+        if (getY() <= 0) {
+            mundo.removeObject(this);
+        }
+        
     }
 }

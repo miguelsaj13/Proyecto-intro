@@ -26,8 +26,12 @@ public class Enemigo extends Actor
     public void mover()
     {
         setLocation(getX(), getY() + velocidad);
-        if(getY() > getWorld().getHeight())
+
+        GreenfootImage img = getImage();
+
+        if(getY() + img.getHeight()/2 >= getWorld().getHeight())
         {
+            ((SpaceWorld)getWorld()).perderVida();
             getWorld().removeObject(this);
         }
     }
@@ -39,7 +43,7 @@ public class Enemigo extends Actor
         // Dispara cada cierto tiempo
         if(contadorDisparo >= 80)
         {
-            DisparoEnemigo disparo = new DisparoEnemigo();
+                DisparoEnemigo disparo = new DisparoEnemigo();
 
             getWorld().addObject(disparo, getX(), getY() + 20);
 
