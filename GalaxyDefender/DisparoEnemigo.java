@@ -38,29 +38,26 @@ public class DisparoEnemigo extends Actor {
     //Indicaciones de colisión con jugador
     
     private void verificarColision() {
-        // Detecta si el disparo enemigo tocó al jugador
         if(getWorld() == null) {
             return;
         }
-
+        
+        // Detecta si el disparo enemigo tocó al jugador
         Actor jugador = getOneIntersectingObject(Player.class);
-
-        if(jugador != null) {
+        if (jugador != null) {
             ((SpaceWorld) getWorld()).perderVida();
             getWorld().removeObject(this);
         }
     }
     
     //Indicaciones para cuando el disparo toque el borde de la pantalla
-    private void verificarBorde() 
-    {
-        //Si el disparo toca el borde inferior elimina el disparo
+    private void verificarBorde() {
         if(getWorld() == null) {
             return;
         }
 
         GreenfootImage img = getImage();
-
+        //Si el disparo toca el borde inferior elimina el disparo
         if(getY() + img.getHeight()/2 >= getWorld().getHeight()) {
             getWorld().removeObject(this);
         }

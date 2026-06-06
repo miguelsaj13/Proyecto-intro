@@ -12,7 +12,9 @@ public class Enemigo extends Actor
      * Act - do whatever the Enemigo wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int velocidad = 2;
+    protected int velocidad = 2;
+    protected int vida = 1;
+    protected int frecuenciaDisparo = 80;
 
     // Contador para controlar disparos
     private int contadorDisparo = 0;
@@ -26,7 +28,6 @@ public class Enemigo extends Actor
     public void mover()
     {
         setLocation(getX(), getY() + velocidad);
-
         GreenfootImage img = getImage();
 
         if(getY() + img.getHeight()/2 >= getWorld().getHeight())
@@ -41,13 +42,24 @@ public class Enemigo extends Actor
         contadorDisparo++;
 
         // Dispara cada cierto tiempo
-        if(contadorDisparo >= 80)
+        if(contadorDisparo >= frecuenciaDisparo)
         {
-                DisparoEnemigo disparo = new DisparoEnemigo();
+            DisparoEnemigo disparo = new DisparoEnemigo();
 
             getWorld().addObject(disparo, getX(), getY() + 20);
 
             contadorDisparo = 0;
+        }
+    }
+    
+    public void recibirDanio()
+    {
+        vida--;
+    
+        if(vida <= 0)
+        {
+            ((SpaceWorld)getWorld()).sumarPuntos(10);
+            getWorld().removeObject(this);
         }
     }
 }

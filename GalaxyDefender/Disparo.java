@@ -27,6 +27,7 @@ public class Disparo extends Actor {
             return;
         }
         //Verifica si el disparo chocó contra el borde del mundo
+        
         if (getWorld() == null) return;
         
         verificarBorde();
@@ -41,13 +42,12 @@ public class Disparo extends Actor {
     //Indicaciones para la colisión de los disparos
     private boolean verificarColisiones() {
         // Detecta si el disparo tocó un enemigo
-        Actor enemigo = getOneIntersectingObject(Enemigo.class);
-        if (enemigo != null) {
-            ((SpaceWorld) getWorld()).sumarPuntos(10);
-            getWorld().removeObject(enemigo);
+        Enemigo enemigo = (Enemigo)getOneIntersectingObject(Enemigo.class);
+
+        if(enemigo != null)
+        {
+            enemigo.recibirDanio();
             getWorld().removeObject(this);
-            
-            //Reproducción del audio de colisión
             Greenfoot.playSound("Explosion.wav");
             return true;
         }
@@ -57,6 +57,8 @@ public class Disparo extends Actor {
     //Indicaciones para los disparos que van hacia el borde del mundo
     private void verificarBorde() {
         // Elimina el disparo si sale de la pantalla
+        if (getY() < 0) {
+            getWorld().removeObject(this);
         World mundo = getWorld();
 
         if (mundo == null) {
@@ -67,5 +69,6 @@ public class Disparo extends Actor {
             mundo.removeObject(this);
         }
         
+      }
     }
 }

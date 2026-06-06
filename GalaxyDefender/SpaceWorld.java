@@ -9,6 +9,7 @@ public class SpaceWorld extends World
     private int nivel = 1;
     private int tiempoSpawn = 100;
     private int vidas = 3;
+    private boolean bossAparecio = false;
     
     //Aquí se indican el tamaño y aparición del jugador
     public SpaceWorld()
@@ -26,6 +27,13 @@ public class SpaceWorld extends World
     public void act()
     {
         generarEnemigos();
+        
+        if(score >= 500 && !bossAparecio)
+        {
+            addObject(new BossEnemy(), 400, 100);
+    
+            bossAparecio = true;
+        }
     }
     
     public void generarEnemigos()
@@ -36,11 +44,44 @@ public class SpaceWorld extends World
         if(contadorEnemigos >= tiempoSpawn)
         {
             int x = Greenfoot.getRandomNumber(getWidth());
+    
+            if(nivel == 1)
+            {
+                addObject(new Enemigo(), x, 50);
+            }
+            else if(nivel == 2)
+            {
+                int tipo = Greenfoot.getRandomNumber(10);
+    
+                if(tipo < 7)
+                {
+                    addObject(new Enemigo(), x, 50);
+                }
+                else
+                {
+                    addObject(new EnemigoRapido(), x, 50);
+                }
+            }
+            else if(nivel == 3)
+            {
+                int tipo = Greenfoot.getRandomNumber(10);
+    
+                if(tipo < 5)
+                {
+                    addObject(new Enemigo(), x, 50);
+                }
+                else if(tipo < 8)
+                {
+                    addObject(new EnemigoRapido(), x, 50);
+                }
+                else
+                {
+                    addObject(new EnemigoTanque(), x, 50);
+                }
+            }
 
-            addObject(new Enemigo(), x, 50);
-
-            contadorEnemigos = 0;
-        }
+        contadorEnemigos = 0;
+    }
     }
     
     private void actualizarNivel()
@@ -86,5 +127,10 @@ public class SpaceWorld extends World
         showText("GAME OVER", 400, 300);
         showText("Puntaje Final: " + score, 400, 320);
         Greenfoot.stop();
+    }
+    
+    public int getScore()
+    {
+        return score;
     }
 }

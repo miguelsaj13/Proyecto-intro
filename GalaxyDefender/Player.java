@@ -9,15 +9,20 @@ public class Player extends Actor
     //esto para que cuando este se haya reproducido una vez acabar la repetición
     private boolean sonidoReproducido = false;
     
+    private int velocidadMovimiento = 6;
     private int tiempoDisparo = 20;
+    private int recargaDisparo = 15;
     
     public void act()
     {
         if(!sonidoReproducido)
         {
-        sonidoInicio();
-        sonidoReproducido = true;
+            sonidoInicio();
+            sonidoReproducido = true;
         }
+        
+        actualizarMejoras();
+        
         //Función que activas las funciones de movimiento del jugador
         movePlayer();
         disparar();
@@ -37,14 +42,14 @@ public class Player extends Actor
         {
             //Cuando el jugador presiona la tecla "a" 
             //el jugador se movera hacia la izquierda
-            move(-5);
+            move(-velocidadMovimiento);
         }
 
         if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d"))
         {
             //Cuando el jugador presiona la tecla "d"
             //el jugador se movera hacia la izquierda
-            move(5);
+            move(velocidadMovimiento);
         }
 
         //Verificación para el jugador, asi no sale por el lado izquierdo de la pantalla
@@ -65,13 +70,36 @@ public class Player extends Actor
     
     public void disparar()
     {
-        if(Greenfoot.isKeyDown("space") && tiempoDisparo >= 15)
+        if(Greenfoot.isKeyDown("space") && tiempoDisparo >= recargaDisparo)
         {
             Disparo disparo = new Disparo();
 
             getWorld().addObject(disparo, getX(), getY() - 20);
 
             tiempoDisparo = 0;
+        }
+    }
+    
+    private void actualizarMejoras()
+    {
+        SpaceWorld mundo = (SpaceWorld)getWorld();
+    
+        int puntos = mundo.getScore();
+    
+        if(puntos >= 200)
+        {
+            velocidadMovimiento = 10;
+            recargaDisparo = 5;
+        }
+        else if(puntos >= 100)
+        {
+            velocidadMovimiento = 8;
+            recargaDisparo = 10;
+        }
+        else
+        {
+            velocidadMovimiento = 6;
+            recargaDisparo = 15;
         }
     }
 }
